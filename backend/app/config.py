@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     llm_api_keys: str = ""
-    llm_model: str = "gemini/gemini-2.0-flash"
+    llm_model: str = "gemini/gemini-3.5-flash-lite"
     database_url: str = "sqlite:///./data/app.db"
     allowed_origins: str = "http://localhost:3000"
     enable_failure_simulation: bool = False

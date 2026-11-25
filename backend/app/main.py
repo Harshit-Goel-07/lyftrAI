@@ -77,6 +77,8 @@ def chat(
     payload: ChatRequest,
     x_simulate_failure: Optional[str] = Header(default=None, alias="X-Simulate-Failure"),
 ) -> ChatResponse:
+    if not isinstance(x_simulate_failure, str):
+        x_simulate_failure = None
     cfg = get_settings()
     db_path = cfg.sqlite_path
 

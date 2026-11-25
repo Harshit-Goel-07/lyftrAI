@@ -3,8 +3,10 @@ import time
 from typing import Any, Dict, List, Optional, Tuple
 
 os.environ.setdefault("LITELLM_LOCAL_MODEL_COST_MAP", "True")
+os.environ.setdefault("LITELLM_TELEMETRY", "False")
 
 import litellm
+litellm.telemetry = False
 from litellm.caching.caching import Cache
 
 VALID_SIMULATED_STATUSES = {"429", "500", "502", "503"}
@@ -15,13 +17,14 @@ class AllProvidersUnavailableError(Exception):
 
 
 def init_litellm_cache() -> None:
+    Cache._get_litellm_supported_transcription_kwargs = lambda self: set()
     if getattr(litellm, "cache", None) is None:
         litellm.cache = Cache(type="local")
 
 
-def parse_simulate_failure_header(header_value: Optional[str]) -> Dict[str, int]:
+def parse_simulate_failure_header(header_value: Any) -> Dict[str, int]:
     """Parse X-Simulate-Failure header into a mapping of key_id (or '*') -> status code."""
-    if not header_value:
+    if not header_value or not isinstance(header_value, str):
         return {}
     failures: Dict[str, int] = {}
     for pair in header_value.split(","):
