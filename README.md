@@ -3,8 +3,8 @@
 A full-stack AI chatbot application built with **React**, **FastAPI**, **LiteLLM**, and **SQLite**, featuring automatic API key failover, response caching, per-request token tracking, and multi-turn conversation memory.
 
 ## 1. Live URLs
-- **Frontend:** `<your-deployed-frontend-url>`
-- **Backend:** `<your-deployed-backend-url>`
+- **Frontend:** https://lyftrai-c3ux.onrender.com
+- **Backend:** https://lyftrai-qtj5.onrender.com
 
 ## 2. Run locally
 
